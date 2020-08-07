@@ -5,11 +5,11 @@ const { response } = require('express');
 
 module.exports = async (re)=>{
     let links = [];
-    for(i=0;i<=5;i++){
+    for(i=0;i<=176;i++){
         links.push(fetchPageGetLinks(`http://kythuatphancung.vn/search/laptop-schematics_${i}.html`))
     }
     return Promise.all(links).then(response=>{
-        [].concat.apply([],response);
+        return [].concat.apply([],response);
     })
 
     
@@ -20,6 +20,7 @@ function fetchPageGetLinks(url){
         .then(response=>{
             return getDownloadLinks(response.data);
         })
+        .catch(err=>console.log(err))
 }
 
 function getDownloadLinks(page){
